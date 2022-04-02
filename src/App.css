@@ -19,6 +19,7 @@
   /* justify-content: space-evenly; */
   font-size: 3vh;
   padding: 0 0 2vh 0;
+  overflow: scroll;
 
 }
 
@@ -48,6 +49,8 @@ li {
   font-size: 5vh;
   width: 40%;
   padding-bottom:3vh;
+  
+  
  
 }
 
