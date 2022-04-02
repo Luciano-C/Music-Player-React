@@ -16,7 +16,6 @@
   height: 70vh;
   width: 70vh;
   list-style-type: none;
-  /* justify-content: space-evenly; */
   font-size: 3vh;
   padding: 0 0 2vh 0;
   overflow: scroll;
@@ -46,7 +45,7 @@ li {
   display: flex;
   color: white;
   justify-content: space-between;
-  font-size: 5vh;
+  font-size: 4vh;
   width: 40%;
   padding-bottom:3vh;
   
@@ -60,4 +59,16 @@ li {
   align-items: center;
   justify-content: center;
   border: gray solid 1px;
+}
+
+
+.fa-play, .fa-caret-square-left, .fa-caret-square-right {
+  text-align: center;
+  padding: 4%;
+}
+
+.fa-play:active, .fa-caret-square-left:active, .fa-caret-square-right:active {
+  background-color: rgb(69, 245, 148);
+  border: rgb(46, 155, 95) solid 2px;
+  
 }
