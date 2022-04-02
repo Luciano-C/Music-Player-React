@@ -10,10 +10,18 @@ const Playlist = () => {
     
     
     return (
-        <div>
+        <div className="musicPlayer">
             <ul className="playlist">
                 {songList}
             </ul>
+            <div className="controls">
+            <i class="fas fa-caret-square-left"></i>
+            <i class="fas fa-play"></i>
+            {/* <i class="fas fa-pause-circle"></i> */}
+            <i class="fas fa-caret-square-right"></i>
+            
+
+            </div>
         </div>
     )
 }
