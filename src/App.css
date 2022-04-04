@@ -82,6 +82,10 @@ li {
   border: rgb(46, 155, 95) solid 2px;
 }
 
+li:active {
+  background-color: rgb(69, 245, 148);
+}
+
 #logo {
   height: 15vh;
   width: 100%;
