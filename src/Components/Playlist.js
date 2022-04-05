@@ -8,10 +8,19 @@ const Playlist = () => {
     const [currentSong, setCurrentSong] = useState({});
     const [audio] = useState(new Audio("https://assets.breatheco.de/apis/sound/files/mario/songs/castle.mp3"));
     const [isSongPlaying, setIsSongPlaying] = useState(false);
+    const [repeateMode, setRepeatMode] = useState(false);
 
     audio.onended = () => {
-        stopMusic();
+        if (!repeateMode) {
+            stopMusic();
+        }
+        else {
+            playMusic();
+        }
+        
     };
+
+
 
     let songListHTML = songs.map((x, i) => <li key={i} onClick={() => { clickHandler(i) }}><span className="songNumber">{i < 9 ? `0${i + 1}` : `${i + 1}`}</span><span className="songName">{x.name}</span></li>);
 
@@ -79,7 +88,15 @@ const Playlist = () => {
         console.log(audio.volume);
     }
 
-
+    const repeatModeHandler = () => {
+        if (repeateMode) {
+            setRepeatMode(false);
+        }
+        else {
+            setRepeatMode(true);
+            console.log(repeateMode);
+        }
+    }
 
     return (
         <div className="musicPlayer">
@@ -93,6 +110,8 @@ const Playlist = () => {
                 <i className="fas fa-caret-square-right" onClick={() => nextSong()}></i>
                 <i className="fas fa-volume-down" onClick={() => {volumeDown()}}></i>
                 <i className="fas fa-volume-up" onClick={() => {volumeUp()}}></i>
+                <i className="fas fa-repeat" style={repeateMode ? {backgroundColor:"rgb(69, 245, 148)"}:{backgroundColor:"transparent"}} onClick={() => {repeatModeHandler()}}></i>
+                {/* <i className="fas fa-align-justify"></i> */}
             </div>
         </div>
     )

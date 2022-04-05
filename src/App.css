@@ -73,10 +73,14 @@ li {
 
 .fa-volume-up, .fa-volume-down {
   text-align: center;
-  padding: 1.2vh;
+  padding: 0.8vh;
   border: 2px solid  rgba(33,33,33,255);
 }
 
+.fa-repeat {
+  text-align: center;
+  padding: 1.2vh;
+}
 
 .fa-play:active, .fa-caret-square-left:active, .fa-caret-square-right:active, .fa-volume-up:active, .fa-volume-down:active {
   background-color: rgb(69, 245, 148);
