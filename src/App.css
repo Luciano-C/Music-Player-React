@@ -65,14 +65,20 @@ li {
 }
 
 
-.fa-play, .fa-caret-square-left, .fa-caret-square-right, .fa-pause-circle {
+.fa-play, .fa-caret-square-left, .fa-caret-square-right, .fa-pause-circle  {
   text-align: center;
   padding: 0.8vh;
   border: 2px solid  rgba(33,33,33,255);
 }
 
+.fa-volume-up, .fa-volume-down {
+  text-align: center;
+  padding: 1.2vh;
+  border: 2px solid  rgba(33,33,33,255);
+}
 
-.fa-play:active, .fa-caret-square-left:active, .fa-caret-square-right:active {
+
+.fa-play:active, .fa-caret-square-left:active, .fa-caret-square-right:active, .fa-volume-up:active, .fa-volume-down:active {
   background-color: rgb(69, 245, 148);
   border: rgb(46, 155, 95) solid 2px;
 }

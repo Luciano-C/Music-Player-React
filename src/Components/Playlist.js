@@ -21,6 +21,11 @@ const Playlist = () => {
         playMusic();
     }, [currentSong]);
 
+    // Para cambiar el botón a play en la primera renderización
+    useEffect(() => {
+        setIsSongPlaying(false)
+    }, []);
+
 
     const clickHandler = (i) => {
         setCurrentSong(songs[i]);
@@ -54,6 +59,26 @@ const Playlist = () => {
         currentIndex === 0 ? setCurrentSong(songs[songs.length - 1]) : setCurrentSong(songs[currentIndex - 1]);
     }
 
+    const volumeUp = () => {
+        if (audio.volume + 0.1 <= 1) {
+            audio.volume += 0.1
+        }
+        else {
+            audio.volume = 1;
+        }
+        console.log(audio.volume);
+    }
+    const volumeDown = () => {
+        if (audio.volume - 0.1 >= 0) {
+            audio.volume -= 0.1;
+        }
+        else {
+            audio.volume = 0;
+        }
+        
+        console.log(audio.volume);
+    }
+
 
 
     return (
@@ -65,8 +90,9 @@ const Playlist = () => {
             <div className="controls">
                 <i className="fas fa-caret-square-left" onClick={() => {prevSong()}}></i>
                 {isSongPlaying === true ? <i className="fas fa-pause-circle" onClick={() => { pauseMusic() }}></i> : <i className="fas fa-play" onClick={() => { playMusic() }}></i>}
-
                 <i className="fas fa-caret-square-right" onClick={() => nextSong()}></i>
+                <i className="fas fa-volume-down" onClick={() => {volumeDown()}}></i>
+                <i className="fas fa-volume-up" onClick={() => {volumeUp()}}></i>
             </div>
         </div>
     )
