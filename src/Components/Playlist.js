@@ -12,7 +12,7 @@ const Playlist = () => {
     audio.onended = () => {
         stopMusic();
     };  
-    let songListHTML = songs.map((x, i) => <li key={i} onClick={() => {clickHandler(x.name)}}><span className="songNumber">{i < 9 ? `0${i + 1}` : `${i + 1}`}</span><span className="songName">{x.name}</span></li>);
+    let songListHTML = songs.map((x, i) => <li key={i} onClick={() => {selectSongObject(x.name)}}><span className="songNumber">{i < 9 ? `0${i + 1}` : `${i + 1}`}</span><span className="songName">{x.name}</span></li>);
 
     useEffect(() => { 
     
@@ -20,20 +20,7 @@ const Playlist = () => {
            
     }, [currentSong])
 
-    const clickHandler = (songName) => {
-        if (isSongPlaying === true) {
-            
-            selectSongObject(songName);
-    
-      
-        }
-        else {
-            selectSongObject(songName);
-        
-        }
-        
-
-    }
+  
 
     const selectSongObject = (requiredSong) => {
         let songObject = songs.filter(x => x.name === requiredSong).reduce(x => x);
