@@ -6,36 +6,38 @@ import logo from "../logo.JPG"
 
 const Playlist = () => {
     const [currentSong, setCurrentSong] = useState({});
-    const [audio, setAudio] = useState(new Audio());
+    const [audio] = useState(new Audio("https://assets.breatheco.de/apis/sound/files/mario/songs/castle.mp3"));
     const [isSongPlaying, setIsSongPlaying] = useState(false);
    
     audio.onended = () => {
         stopMusic();
     };  
-    let songListHTML = songs.map((x, i) => <li key={i} onClick={() => {selectSongObject(x.name)}}><span className="songNumber">{i < 9 ? `0${i + 1}` : `${i + 1}`}</span><span className="songName">{x.name}</span></li>);
+    
+    let songListHTML = songs.map((x, i) => <li key={i} onClick={() => {clickHandler(i)}}><span className="songNumber">{i < 9 ? `0${i + 1}` : `${i + 1}`}</span><span className="songName">{x.name}</span></li>);
 
-    useEffect(() => { 
-        setAudio(new Audio(currentSong.url));
-    }, [currentSong])
+    useEffect(() => {
+        pauseMusic();
+        audio.src = currentSong.url;
+        console.log(audio.src);
+        playMusic();
+    }, [currentSong]);
 
   
-
-    const selectSongObject = (requiredSong) => {
-        let songObject = songs.filter(x => x.name === requiredSong).reduce(x => x);
-        setCurrentSong(songObject);
+    const clickHandler = (i) => {
+        setCurrentSong(songs[i]);
+        console.log(isSongPlaying);      
     }
+
 
 
     const playMusic = () => {
         audio.play();
         setIsSongPlaying(true);
- 
     }
 
     const pauseMusic = () => {
         audio.pause();
         setIsSongPlaying(false);
-
     }
 
    const stopMusic = () => {
@@ -58,6 +60,7 @@ const Playlist = () => {
                     
                 <i className="fas fa-caret-square-right" onClick={() => console.log("hola")}></i>
             </div>
+            
 
         </div>
     )
