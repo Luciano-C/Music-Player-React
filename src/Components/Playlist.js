@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import songs from "../Resources/songs";
 import logo from "../logo.JPG"
+import pickRandomFromArray from "../Resources/randomFromArray";
 
 /* [{ "id": 1, "category": "game", "name": "Mario Castle", "url": "https://assets.breatheco.de/apis/sound/files/mario/songs/castle.mp3" }] */
 
@@ -9,6 +10,9 @@ const Playlist = () => {
     const [audio] = useState(new Audio("https://assets.breatheco.de/apis/sound/files/mario/songs/castle.mp3"));
     const [isSongPlaying, setIsSongPlaying] = useState(false);
     const [repeatMode, setRepeatMode] = useState(false);
+    const [suffleMode, setShuffleMode] = useState(false);
+    const [inputValue, setInputValue] = useState(0)
+    
 
     audio.onended = () => {
         if (!repeatMode) {
@@ -16,10 +20,12 @@ const Playlist = () => {
         }
         else {
             playMusic();
-        }
-        
+        }    
     };
 
+    audio.ontimeupdate = () => {
+        setInputValue(audio.currentTime);
+    }
 
 
     let songListHTML = songs.map((x, i) => <li key={i} onClick={() => { clickHandler(i) }}><span className="songNumber">{i < 9 ? `0${i + 1}` : `${i + 1}`}</span><span className="songName">{x.name}</span></li>);
@@ -59,13 +65,25 @@ const Playlist = () => {
     };
 
     const nextSong = () => {
-        let currentIndex = songs.indexOf(currentSong);
-        currentIndex < songs.length -1 ? setCurrentSong(songs[currentIndex + 1]) : setCurrentSong(songs[0]);
+        if (!suffleMode) {
+            let currentIndex = songs.indexOf(currentSong);
+            currentIndex < songs.length -1 ? setCurrentSong(songs[currentIndex + 1]) : setCurrentSong(songs[0]);
+        }
+        else {
+            let otherSongs = songs.filter(x => x !== currentSong);
+            setCurrentSong(pickRandomFromArray(otherSongs));
+        }; 
     };
 
     const prevSong = () => {
-        let currentIndex = songs.indexOf(currentSong);
-        currentIndex === 0 ? setCurrentSong(songs[songs.length - 1]) : setCurrentSong(songs[currentIndex - 1]);
+        if (!suffleMode) {
+            let currentIndex = songs.indexOf(currentSong);
+            currentIndex === 0 ? setCurrentSong(songs[songs.length - 1]) : setCurrentSong(songs[currentIndex - 1]);
+        }
+        else {
+            let otherSongs = songs.filter(x => x !== currentSong);
+            setCurrentSong(pickRandomFromArray(otherSongs));
+        }; 
     }
 
     const volumeUp = () => {
@@ -94,9 +112,18 @@ const Playlist = () => {
         }
         else {
             setRepeatMode(true);
-            console.log(repeatMode);
         }
     }
+
+    const suffleModeHandler = () => {
+        if (suffleMode) {
+            setShuffleMode(false);
+        }
+        else {
+            setShuffleMode(true);
+        }
+    }
+
 
     return (
         <div className="musicPlayer">
@@ -111,7 +138,9 @@ const Playlist = () => {
                 <i className="fas fa-volume-down" onClick={() => {volumeDown()}}></i>
                 <i className="fas fa-volume-up" onClick={() => {volumeUp()}}></i>
                 <i className="fas fa-repeat" style={repeatMode ? {backgroundColor:"rgb(69, 245, 148)"}:{backgroundColor:"transparent"}} onClick={() => {repeatModeHandler()}}></i>
-                {/* <i className="fas fa-align-justify"></i> */}
+                <i className="fas fa-random" style={suffleMode ? {backgroundColor:"rgb(69, 245, 148)"}:{backgroundColor:"transparent"}} onClick={() => {suffleModeHandler()}}></i>
+                <input type="range" id="timer" min={0} max={audio.duration} default = {0} value={inputValue} onChange={(e)=>{audio.currentTime = e.target.value}}></input>
+  
             </div>
         </div>
     )

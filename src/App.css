@@ -49,7 +49,7 @@ li {
   color: white;
   justify-content: space-evenly;
   font-size: 4vh;
-  width: 60%;
+  width: 100%;
   padding-bottom:3vh;
   height: 6vh;
   
@@ -64,12 +64,25 @@ li {
   border: gray solid 1px;
 }
 
-
-.fa-play, .fa-caret-square-left, .fa-caret-square-right, .fa-pause-circle  {
+.fa-caret-square-left, .fa-caret-square-right {
   text-align: center;
   padding: 0.8vh;
   border: 2px solid  rgba(33,33,33,255);
 }
+
+.fa-play, .fa-pause-circle {
+  text-align: center;
+  padding: 0.8vh ;
+  border: 2px solid  rgba(33,33,33,255);
+  width: 5vh;
+}
+/* {
+  text-align: center;
+  width:2vh;
+  padding: 0.8vh ;
+  border: 2px solid  rgba(33,33,33,255);
+}
+ */
 
 .fa-volume-up, .fa-volume-down {
   text-align: center;
@@ -77,10 +90,11 @@ li {
   border: 2px solid  rgba(33,33,33,255);
 }
 
-.fa-repeat {
+.fa-repeat, .fa-random {
   text-align: center;
   padding: 1.2vh;
 }
+
 
 .fa-play:active, .fa-caret-square-left:active, .fa-caret-square-right:active, .fa-volume-up:active, .fa-volume-down:active {
   background-color: rgb(69, 245, 148);
@@ -92,7 +106,7 @@ li {
   border: rgb(46, 155, 95) solid 2px;
 }
 
-li:active {
+li:active, .fa-random:active {
   background-color: rgb(69, 245, 148);
 }
 
@@ -103,3 +117,8 @@ li:active {
   border: 1px solid black;
   filter:contrast(160%)
 }
+
+#timer {
+  width: 12vh;
+}
+
